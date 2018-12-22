@@ -2,19 +2,15 @@ package parser;
 
 import lexical_analyzer.Token;
 import lexical_analyzer.usedclass;
+import semantic_ana.Split_txt;
 
 import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 
-/**
- * Author:fan
- * Date: 17-12-17
- * Time: 上午2:40
- * Description:
- */
+
 public class parAna_used {
-    public LinkedList paraAna(String url){
-        BlockingQueue<Token> queue = new usedclass().lexi_ana(url);
+    public LinkedList paraAna(Split_txt t){
+        BlockingQueue<Token> queue = new usedclass().lexi_ana(t);
         //
         if (queue.isEmpty()) return new LinkedList(queue);
         //

@@ -2,17 +2,12 @@ package semantic_ana;
 
 import java.io.*;
 
-/**
- * Author:fan
- * Date: 17-12-17
- * Time: 上午2:53
- * Description:
- */
 public class Split_txt {//每次读一句话到另一个文本
     private String retainString = new String();
     private int no = 0;//标记第几行
-    public void readIn(String url){
-        File file = new File(url);
+    private String currentString;
+    public void readIn(String filePath){
+        File file = new File(filePath);
         Reader reader = null;
         int c;
         try {
@@ -45,8 +40,8 @@ public class Split_txt {//每次读一句话到另一个文本
         if (string.indexOf("\r\n")!=-1) {
         	string = string.substring(string.indexOf("\r\n")+2);
         }
-        
-        File file = new File("D://test1.txt");
+        currentString = string;
+        /*File file = new File("D://test1.txt");
         if (file.exists()){
             file.delete();
             try {
@@ -75,13 +70,13 @@ public class Split_txt {//每次读一句话到另一个文本
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(-1);
-        }
+        }*/
         no++;
     }
 
     public String readFile(){
-        String string = new String();
-        File file = new File("D://test1.txt");
+        //String string = new String();
+        /*File file = new File("D://test1.txt");
         Reader reader = null;
         int c;
         try {
@@ -101,8 +96,14 @@ public class Split_txt {//每次读一句话到另一个文本
         if (string.indexOf("\r\n")!=-1) {
         	System.out.println(string.indexOf("\r\n"));
         	string = string.substring(0, string.indexOf("\r\n"));
-        }
+        }*/
         
-        return string;
+        return currentString;
+    }
+    public void setCurrentString(String s) {
+    	currentString = s;
+    }
+    public String getCurrentString() {
+    	return currentString;
     }
 }

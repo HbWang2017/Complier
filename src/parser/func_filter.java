@@ -6,12 +6,6 @@ import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Author:fan
- * Date: 17-12-16
- * Time: 下午7:36
- * Description:
- */
 public class func_filter {//过滤sin,cos,tan,ln,exp,sqrt
     private LinkedList linkedList1 = new LinkedList();
     public LinkedList filterFunc(BlockingQueue<Token> queue){

@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/parser=UTF-8
 encoding//src/parser/analySentence.java=UTF-8
+encoding//src/semantic_ana=UTF-8
 encoding/<project>=UTF-8
 separateDerivedEncodings=true

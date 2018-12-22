@@ -7,16 +7,7 @@ import java.util.LinkedList;
 import java.util.TreeSet;
 
 
-/**
- * Author:fan
- * Date: 17-12-15
- * Time: 下午9:55
- * Description:
- * Attention:
- *  Will you use list you should
- * not add the same variate with
- * the same storage space.
- */
+
 public class expression_compute {//计算带括号的表达式 Token[]
     private LinkedList<token_priority> list = new LinkedList<token_priority>();//优先级列表
     private token_priority tokenPriority = new token_priority();//优先级算符

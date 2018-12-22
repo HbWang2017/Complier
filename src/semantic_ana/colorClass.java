@@ -1,11 +1,6 @@
 package semantic_ana;
 
-/**
- * Author:fan
- * Date: 17-12-19
- * Time: 下午1:25
- * Description:
- */
+
 public class colorClass {
     private String color;
     private int no;

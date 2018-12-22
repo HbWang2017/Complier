@@ -2,12 +2,7 @@ package parser;
 
 import lexical_analyzer.Token;
 
-/**
- * Author:fan
- * Date: 17-12-15
- * Time: 下午8:31
- * Description:
- */
+
 public class sentence_pattern {//句子模式
     private String pattern = new String();
     private boolean origin_pattern = false;

@@ -1,11 +1,6 @@
 package semantic_ana;
 
-/**
- * Author:fan
- * Date: 17-12-17
- * Time: 上午10:40
- * Description:
- */
+
 public class pointClass {
     private double x;
     private double y;

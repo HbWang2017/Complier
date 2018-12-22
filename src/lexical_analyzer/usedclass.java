@@ -4,20 +4,18 @@ import java.io.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Author:fan
- * Date: 17-12-15
- * Time: 下午6:03
- * Description:
- */
+import semantic_ana.Split_txt;
+
+
 public class usedclass {//通过词法分析，得到符号表
-    Token_Table token_table = new Token_Table();
-    Token token;
+	private Token_Table token_table = new Token_Table();
+	private Token token;
     private String string = new String();
     private BlockingQueue<Token> queue = new LinkedBlockingQueue<Token>(1000);
 
-    public BlockingQueue<Token> lexi_ana(String string1){//输出匹配的符号表
-        File file = new File(string1);
+    public BlockingQueue<Token> lexi_ana(Split_txt t){//输出匹配的符号表
+    	String string = t.getCurrentString();
+       /* File file = new File(string1);
         Reader reader = null;
         int c;
         try {
@@ -29,7 +27,7 @@ public class usedclass {//通过词法分析，得到符号表
         }catch (IOException e){
             System.out.println("打开文件错误");
             e.printStackTrace();//
-        }
+        }*/
         queue = StringToTokenTable(string);
         return queue;
     }

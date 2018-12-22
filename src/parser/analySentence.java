@@ -1,6 +1,5 @@
 package parser;
 
-
 import lexical_analyzer.Token;
 import lexical_analyzer.Token_Table;
 import lexical_analyzer.usedclass;
@@ -9,17 +8,11 @@ import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Author:fan
- * Date: 17-12-16
- * Time: 涓嬪崍7:59
- * Description:
- */
-public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛屽苟涓旀浛鎹㈠嚱鏁板拰琛ㄨ揪寮�,鐩爣杩斿洖涓�鍙ヨ瘽
+public class analySentence {//分析传进来的句子结构，并且替换函数和表达式,目标返回一句话
     public BlockingQueue<Token> alaly_sentence(BlockingQueue<Token> queue){
         LinkedList linkedList = new LinkedList(queue);
 
-        //鏇挎崲PI鍜孍
+        //替换PI和E
         for (int i = 0;i < linkedList.size();i++){
             Token token1 =(Token) linkedList.get(i);
             if (token1.getOriinpt() == "PI") {
@@ -30,33 +23,33 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
                 linkedList.remove(i);linkedList.add(i,token11);
             }
         }
-        linkedList = new func_filter().filterFunc(link2queue(linkedList));//杩囨护鍑芥暟
+        linkedList = new func_filter().filterFunc(link2queue(linkedList));//过滤函数
 
         sentence_pattern sentencePattern = new sentence_pattern();
         Token token1 =(Token) linkedList.get(0);
         sentencePattern.setPattern(token1);
-        //寮�濮嬪尮閰嶅彞瀛�,鍒ゅ畾璇硶妯″紡
+        //开始匹配句子,判定语法模式
         switch (sentencePattern.getPattern()){
             case "origin_pattern":
                 linkedList = testOriinputPattern(linkedList);
-                break;//origin妯″紡
+                break;//origin模式
             case "rot_pattern":
                 linkedList = testRotPattern(linkedList);
-                break;//rot妯″紡
+                break;//rot模式
             case "scale_pattern":
                 linkedList = testOriinputPattern(linkedList);
-                break;//scale妯″紡
+                break;//scale模式
             case "for_pattern":
                 linkedList = testForPattern(linkedList);
-                break;//for妯″紡
+                break;//for模式
             //
             case "setcolor_pattern":
                 linkedList = testSetColorPattern(linkedList);
                 break;
             //
         }
-        //娴嬭瘯
-//        System.out.println("After test");//杈撳嚭杩囨护鍑芥暟缁撴灉
+        //测试
+//        System.out.println("After test");//输出过滤函数结果
 //        for (int i = 0;i < linkedList.size();i++){
 //            Token token100 =(Token) linkedList.get(i);
 //            System.out.println( token100.getToken_type() + " " + token100.getOriinpt() + " " + token100.getValue());
@@ -69,31 +62,31 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
         }
         return queue;
     }
-    private LinkedList testOriinputPattern(LinkedList linkedList){//鍒ゅ畾ori璇硶妯″紡鍜宻cale璇硶妯″紡姝ｇ‘鎬�
+    private LinkedList testOriinputPattern(LinkedList linkedList){//判定ori语法模式和scale语法模式正确性
         LinkedList linkedList1 = new LinkedList();
         if (linkedList.size() < 8) {
-            System.out.println("璇硶閿欒 analySentence_1");
+            System.out.println("语法错误 analySentence_1");
             System.exit(-1);
         }
         Token token11 = (Token) linkedList.get(1);
         if (token11.getOriinpt() != "IS"){
-            System.out.println("璇硶閿欒 analySentence_2");
+            System.out.println("语法错误 analySentence_2");
             System.exit(-1);
         }
         token11 = (Token) linkedList.get(2);
         if (token11.getOriinpt() != "("){
-            System.out.println("璇硶閿欒 analySentence_3");
+            System.out.println("语法错误 analySentence_3");
             System.exit(-1);
         }
         token11 = (Token) linkedList.get(linkedList.size()-2);
         if (token11.getOriinpt() != ")"){
-            System.out.println("璇硶閿欒 analySentence_4");
+            System.out.println("语法错误 analySentence_4");
             System.exit(-1);
         }
         int flag = 0;
-        for (int i = 3;i < linkedList.size()-1;){//璁＄畻鎷彿涓殑琛ㄨ揪寮�                               //attention -1
+        for (int i = 3;i < linkedList.size()-1;){//计算括号中的表达式                               //attention -1
             Token token1 =(Token) linkedList.get(i);
-            if (in_pattern(token1.getToken_type()) ){//灞炰簬姝ｅ父鐘舵��
+            if (in_pattern(token1.getToken_type()) ){//属于正常状态
                 linkedList1.add(token1);
                 linkedList.remove(i);
             }else if (token1.getOriinpt() == ","){
@@ -105,11 +98,11 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
                 i += 2;//
             }else {
 
-                System.out.println("璇硶閿欒 analySentence_5");
+                System.out.println("语法错误 analySentence_5");
                 System.exit(-1);
             }
             if (flag > 1){
-                System.out.println("璇硶閿欒 analySentence_6");
+                System.out.println("语法错误 analySentence_6");
                 System.exit(-1);
             }
         }
@@ -121,15 +114,15 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
         linkedList.add(6,token1);
         return linkedList;
     }
-    private LinkedList testRotPattern(LinkedList linkedList){//鍖归厤rot妯″紡
+    private LinkedList testRotPattern(LinkedList linkedList){//匹配rot模式
         LinkedList linkedList1 = new LinkedList();
         if (linkedList.size() < 4){
-            System.out.println("璇硶閿欒 analySentence_7");
+            System.out.println("语法错误 analySentence_7");
             System.exit(-1);
         }
         Token token =(Token) linkedList.get(1);
         if (token.getOriinpt() != "IS"){
-            System.out.println("璇硶閿欒 analySentence_8");
+            System.out.println("语法错误 analySentence_8");
             System.exit(-1);
         }
         for (int i = 2;i < linkedList.size() - 1;){
@@ -138,12 +131,12 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
                 linkedList1.add(token1);
                 linkedList.remove(i);
             }else {
-                System.out.println("璇硶閿欒 analySentence_9");
+                System.out.println("语法错误 analySentence_9");
                 System.exit(-1);
             }
         }
-        //娴嬭瘯
-//        System.out.println("test");//杈撳嚭杩囨护鍑芥暟缁撴灉
+        //测试
+//        System.out.println("test");//输出过滤函数结果
 //        for (int i = 0;i < linkedList1.size();i++){
 //            Token token100 =(Token) linkedList1.get(i);
 //            System.out.println( token100.getToken_type() + " " + token100.getOriinpt() + " " + token100.getValue());
@@ -158,23 +151,23 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
     private LinkedList testForPattern(LinkedList linkedList){
         LinkedList linkedList1 = new LinkedList();
         if (linkedList.size() < 15){
-            System.out.println("璇硶閿欒 1");
+            System.out.println("语法错误 1");
             System.exit(-1);
         }
         Token token;
         token = (Token) linkedList.get(1);
         if (token.getToken_type() != "T"){
-            System.out.println("璇硶閿欒 2");
+            System.out.println("语法错误 2");
             System.exit(-1);
         }
         token = (Token) linkedList.get(2);
         if (token.getToken_type() != "FROM"){
-            System.out.println("璇硶閿欒 3");
+            System.out.println("语法错误 3");
             System.exit(-1);
         }
         for (int i = 3;;){
             Token token1 =(Token) linkedList.get(i);
-            if (in_pattern(token1.getToken_type())){//姝ｅ父妯″紡
+            if (in_pattern(token1.getToken_type())){//正常模式
                 linkedList1.add(token1);
                 linkedList.remove(i);
             }else if (token1.getToken_type() == "TO"){
@@ -184,13 +177,13 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
                 linkedList.add(i,token2);
                 break;
             }else {
-                System.out.println("璇硶閿欒 4");
+                System.out.println("语法错误 4");
                 System.exit(-1);
             }
         }
         for (int i = 5;;){
             Token token1 =(Token) linkedList.get(i);
-            if (in_pattern(token1.getToken_type())){//姝ｅ父妯″紡
+            if (in_pattern(token1.getToken_type())){//正常模式
                 linkedList1.add(token1);
                 linkedList.remove(i);
             }else if (token1.getToken_type() == "STEP"){
@@ -200,13 +193,13 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
                 linkedList.add(i,token2);
                 break;
             }else {
-                System.out.println("璇硶閿欒 5");
+                System.out.println("语法错误 5");
                 System.exit(-1);
             }
         }
         for (int i = 7;;){
             Token token1 =(Token) linkedList.get(i);
-            if (in_pattern(token1.getToken_type())){//姝ｅ父妯″紡
+            if (in_pattern(token1.getToken_type())){//正常模式
                 linkedList1.add(token1);
                 linkedList.remove(i);
             }else if (token1.getToken_type() == "DRAW"){
@@ -216,18 +209,18 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
                 linkedList.add(i,token2);
                 break;
             }else {
-                System.out.println("璇硶閿欒 6");
+                System.out.println("语法错误 6");
                 System.exit(-1);
             }
         }
         Token token10 =(Token) linkedList.get(9);
         if (token10.getOriinpt() != "("){
-            System.out.println("璇硶閿欒 7");
+            System.out.println("语法错误 7");
             System.exit(-1);
         }
         for (int i = 10;;){
             Token token1 =(Token) linkedList.get(i);
-            if (in_pattern(token1.getToken_type())){//姝ｅ父妯″紡
+            if (in_pattern(token1.getToken_type())){//正常模式
                 linkedList1.add(token1);
                 linkedList.remove(i);
             }else if (token1.getToken_type() == "COMMA"){
@@ -239,7 +232,7 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
             }else if (token1.getToken_type() == "T"){
                 break;
             } else {
-                System.out.println("璇硶閿欒 8");
+                System.out.println("语法错误 8");
                 System.exit(-1);
             }
         }
@@ -248,7 +241,7 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
 
         for (int i = 12;;){
             Token token1 =(Token) linkedList.get(i);
-            if (in_pattern(token1.getToken_type())){//姝ｅ父妯″紡
+            if (in_pattern(token1.getToken_type())){//正常模式
                 linkedList2.add(token1);
                 linkedList.remove(i);
                 if (token1.getOriinpt() == "(") flag++;
@@ -268,7 +261,7 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
 
         return linkedList;
     }
-    private String[] patter = {//+-*/鎷彿
+    private String[] patter = {//+-*/括号
             "PLUS","MINUS","MUL","DIV",
             "POWER","CONST_ID","L_BRACKET",
             "R_BRACKET"
@@ -283,10 +276,10 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
         int flag = 0;
         String[] color = {"RED","YELLOW","BLUE","GREEN","BLACK"};
         if (((Token) linkedList.get(1)).getOriinpt() != "("){
-            System.out.println("璇硶閿欒-");
+            System.out.println("语法错误-");
             System.exit(-1);
         }else if (((Token) linkedList.get(3)).getOriinpt() != ")"){
-            System.out.println("璇硶閿欒--");
+            System.out.println("语法错误--");
             System.exit(-1);
         }
         token =(Token) linkedList.get(2);
@@ -295,7 +288,7 @@ public class analySentence {//鍒嗘瀽浼犺繘鏉ョ殑鍙ュ瓙缁撴瀯锛�
         }
         if (flag == 5 && !token.getOriinpt().equalsIgnoreCase(color[4])){
             System.out.println(token.getOriinpt());
-            System.out.println("璇硶閿欒---");
+            System.out.println("语法错误---");
             System.exit(-1);
         }
 

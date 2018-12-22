@@ -1,6 +1,5 @@
 package semantic_ana;
 
-import jdk.nashorn.internal.ir.Block;
 import lexical_analyzer.Token;
 import parser.parAna_used;
 import lexical_analyzer.usedclass;
@@ -12,12 +11,6 @@ import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Author:fan
- * Date: 17-12-17
- * Time: 上午2:53
- * Description:
- */
 public class Main_used {//使用函数
     private double sca_a,sca_b,rot_c,ori_d,ori_e;
     private String color;
@@ -27,7 +20,6 @@ public class Main_used {//使用函数
         LinkedList<pointClass> pointList = new LinkedList<pointClass>();
         LinkedList<colorClass> colorList = new LinkedList<>();
         Main_used main_used = new Main_used();
-        String url = "D://test1.txt";
         Split_txt split_txt = new Split_txt();
         split_txt.readIn("D://test.txt");
         split_txt.writeTo();
@@ -89,7 +81,7 @@ public class Main_used {//使用函数
 
 
 
-                File file = new File("D://test1.txt");
+/*                File file = new File("D://test1.txt");
                 if (file.exists()){
                     file.delete();
                     try {
@@ -116,8 +108,8 @@ public class Main_used {//使用函数
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     System.exit(-1);
-                }
-
+                }*/
+                split_txt.setCurrentString(string2);
                 //
                 System.out.println("End rewrite ");
                 //重写结束
@@ -181,7 +173,7 @@ public class Main_used {//使用函数
 //            }
 
             //
-            LinkedList linkedList = new parAna_used().paraAna(url);
+            LinkedList linkedList = new parAna_used().paraAna(split_txt);
 
 //            for (int i = 0;i < linkedList.size();i++)
 //            {
