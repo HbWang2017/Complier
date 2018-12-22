@@ -2,7 +2,6 @@ package parser;
 
 import lexical_analyzer.Token;
 
-
 public class sentence_pattern {//句子模式
     private String pattern = new String();
     private boolean origin_pattern = false;

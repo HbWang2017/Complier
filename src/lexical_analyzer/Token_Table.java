@@ -1,7 +1,6 @@
 package lexical_analyzer;
 
 import java.util.Vector;
-
 public class Token_Table {//记录符号表
 	public Vector<Token> tokens;
 	Token_Table(){

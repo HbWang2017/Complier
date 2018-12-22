@@ -1,6 +1,5 @@
 package semantic_ana;
 
-
 public class pointClass {
     private double x;
     private double y;

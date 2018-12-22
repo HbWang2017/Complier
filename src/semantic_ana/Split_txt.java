@@ -1,7 +1,6 @@
 package semantic_ana;
 
 import java.io.*;
-
 public class Split_txt {//每次读一句话到另一个文本
     private String retainString = new String();
     private int no = 0;//标记第几行

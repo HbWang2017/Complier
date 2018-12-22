@@ -1,6 +1,4 @@
 package semantic_ana;
-
-
 public class colorClass {
     private String color;
     private int no;

@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.TreeSet;
 
 
-
 public class expression_compute {//计算带括号的表达式 Token[]
     private LinkedList<token_priority> list = new LinkedList<token_priority>();//优先级列表
     private token_priority tokenPriority = new token_priority();//优先级算符

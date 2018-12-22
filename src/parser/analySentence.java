@@ -291,8 +291,6 @@ public class analySentence {//分析传进来的句子结构，并且替换函�
             System.out.println("语法错误---");
             System.exit(-1);
         }
-
-
         return linkedList;
     }
     private BlockingQueue<Token> link2queue(LinkedList<Token> linkedList){

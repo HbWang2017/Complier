@@ -1,6 +1,5 @@
 package lexical_analyzer;
 
-
 public class Token {//记录输入字符串可有的属性
     private Token_Type token_type;//类别
     private String originInput = new String();//原始字符串

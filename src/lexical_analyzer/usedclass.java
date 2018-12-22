@@ -6,7 +6,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import semantic_ana.Split_txt;
 
-
 public class usedclass {//通过词法分析，得到符号表
 	private Token_Table token_table = new Token_Table();
 	private Token token;

@@ -1,16 +1,9 @@
 package semantic_ana;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
-/**
- * Author:fan
- * Date: 17-12-17
- * Time: 上午11:14
- * Description:
- */
 public class drawPoint extends JFrame{
     private Graphics jg;
     private Color rectColor = new Color(0xf5f5f5);

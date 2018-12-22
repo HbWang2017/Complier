@@ -7,7 +7,6 @@ import semantic_ana.Split_txt;
 import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 
-
 public class parAna_used {
     public LinkedList paraAna(Split_txt t){
         BlockingQueue<Token> queue = new usedclass().lexi_ana(t);

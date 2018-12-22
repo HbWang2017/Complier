@@ -1,5 +1,4 @@
 package semantic_ana;
-
 import lexical_analyzer.Token;
 import parser.parAna_used;
 import lexical_analyzer.usedclass;

@@ -5,7 +5,6 @@ import java.util.Vector;
 public class Token_Type {//记录所有记号
 	private String type;
 	private Vector<String> mark;
-	
 	Token_Type(){
 		type = new String("ERRORTOKEN");
 		mark = new Vector<String>();

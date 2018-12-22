@@ -2,7 +2,6 @@ package parser;
 
 import lexical_analyzer.Token;
 
-
 public class token_priority {//表示算符的优先级
     private Token token;
     private int priority;
