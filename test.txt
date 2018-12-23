@@ -2,9 +2,9 @@ ROT IS 0;
 ORIGIN IS (50,400);
 SCALE IS (2,1);
 FOR T FROM 0 TO 300 STEP 1 DRAW(T,0);
-//ºá×ø±ê
+//orient
 FOR T FROM 0 TO 300 STEP 1 DRAW(0,-T);
---×Ý×ø±ê
+--y=x
 SCALE IS (1,1);
 FOR T FROM 0 TO 300 STEP 1 DRAW(T,-T);
 SCALE IS (20,0.1);
